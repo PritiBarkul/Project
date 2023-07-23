@@ -1,0 +1,33 @@
+Name: Preeti Barkul
+EmailID:barkulpreeti@gmail.com
+phone no:8080947929
+
+Javascript Application
+
+
+const List1 = ['Arjun', 'Adwait', 'Swapnil', 'Amit', 'Vishal', 'Adnan'];
+const List2 = ['Adwait', 'Laxman', 'A Create mit', 'Adnan', 'Nitin', 'Gaurav'];
+
+// a. Get a unique set of users from List1 which are not in List2
+
+const uniqueUsersInList1 = new Set(List1);
+List2.forEach((user) => uniqueUsersInList1.delete(user));
+--------------------------------------------------------------------------------------
+
+// b. Get a unique set of users from List2 which are not in List1
+
+const uniqueUsersInList2 = new Set(List2);
+List1.forEach((user) => uniqueUsersInList2.delete(user));
+---------------------------------------------------------------------------------------
+
+// c. Get a set of users who are present in List1 and List2 both (intersection of List1 & List2)
+
+const setList1 = new Set(List1);
+const intersectionUsers = List2.filter((user) => setList1.has(user));
+--------------------------------------------------------------------------------------
+
+// Output
+
+console.log('Unique users in List1 but not in List2:', Array.from(uniqueUsersInList1));
+console.log('Unique users in List2 but not in List1:', Array.from(uniqueUsersInList2));
+console.log('Intersection of List1 & List2:', intersectionUsers);

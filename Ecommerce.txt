@@ -1,0 +1,96 @@
+
+Name: Preeti Barkul
+EmailID: barkulpreeti@gmail.com
+phone no:9420785700
+
+
+React Web Application
+
+
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+const ProductsList = ({ products }) => {
+  return (
+    <div>
+      <h1>Products List</h1>
+      <ul>
+        {products.map((product) => (
+          <li key={product.id}>
+            <img src={product.imageUrl} alt={product.name} />
+            <h3>{product.name}</h3>
+            <p>Price: ${product.price}</p>
+            <Link to={`/products/${product.id}`}>View Details</Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default ProductsList;
+
+
+--------------------------------------------------------------------------------------
+
+Implement the Product Details Page component:
+
+import React from 'react';
+import { useParams } from 'react-router-dom';
+
+const ProductDetails = ({ products }) => 
+{
+  	const { id } = useParams();
+  	const product = products.find((product) => product.id === Number(id));
+  if (!product)
+ 	{
+    		return <div>Product not found!</div>;
+        }
+
+  	return 
+	(
+    		<div>
+      		<h1>{product.name}</h1>
+      		<img src={product.imageUrl} alt={product.name} />
+      		<p>Price: ${product.price}</p>
+      		<p>Quantity: {product.quantity}</p>
+      		<button>Add to Cart</button>
+    		</div>
+  	);
+};
+----------------------------------------------------------------------
+
+
+// src/App.js
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import ProductsList from './components/ProductsList';
+import ProductDetails from './components/ProductDetails';
+
+const App = () => {
+  // Sample product data (replace this with your actual product data)
+  const products = [
+    {
+      id: 1,
+      name: 'Product 1',
+      price: 10,
+      quantity: 20,
+      imageUrl: 'https://ecommerce.com/product1.jpg',
+    },
+  ];
+
+  return (
+    <Router>
+      <div>
+        <Switch>
+          <Route exact path="/">
+            <ProductsList products={products} />
+          </Route>
+          <Route path="/products/:id">
+            <ProductDetails products={products} />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+  );
+};
